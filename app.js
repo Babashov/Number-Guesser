@@ -1,11 +1,13 @@
 // Game Values
-let min = 1,
-    max = 10,
+
+// Random Number Values
+let min = 1,//from 1
+    max = 10,//to 10
     winningNum = getRandomNumber(min,max),
     guessesLeft = 3;
 
 // If you want to uncomment at least line and show in console winning number
-// console.log(winningNum) 
+console.log(winningNum) 
 
 // UI Elements
 const game = document.querySelector('#game'),
@@ -43,8 +45,8 @@ guessBtn.addEventListener('click',(e)=>{
   {
     gameOver(true,`${guessInput.value} is correct, YOU WIN`);
   }else{
-    guessesLeft -= 1;
-
+    // If didn't enter any number $guessesLeft not changes
+    isNaN(guess) ? guessesLeft = guessesLeft : guessesLeft -=1;
     if(guessesLeft === 0)
     {
       gameOver(false,`You Lost Game. The winning number is ${winningNum}`);
@@ -71,7 +73,7 @@ function gameOver(won,msg)
   // Change Border Color
   guessInput.style.borderColor = color;
   // Set Message
-  setMessage(msg);
+  setMessage(msg,color);
   // Play Again
   guessBtn.value = 'Play Again';
   guessBtn.className += 'play-again';
@@ -87,5 +89,5 @@ function setMessage(msg,color)
 // Get Random Winning Numbers
 function getRandomNumber(min,max)
 {
-  return Math.floor(Math.random() * (max-min+1) + min);
+  return Math.floor(Math.random() * (max-min + 1) + min);//return random numbers between 1-10
 }
